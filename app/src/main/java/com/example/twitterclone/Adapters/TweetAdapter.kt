@@ -1,11 +1,11 @@
-package com.example.twitterclone
+package com.example.twitterclone.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.twitterclone.R
 
 class TweetAdapter(var list: List<String>):RecyclerView.Adapter<TweetAdapter.TweetViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.example.twitterclone
+package com.example.twitterclone.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.twitterclone.Fragments.click_suggest
+import com.example.twitterclone.R
 import com.example.twitterclone.data.User
-import com.google.firebase.database.ValueEventListener
-import org.w3c.dom.Text
 
 
 class SuggestedApadter(val list: List<User>, val context: Context, val listener: click_suggest): RecyclerView.Adapter<SuggestedApadter.SuggestViewHolder>() {

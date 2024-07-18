@@ -3,13 +3,12 @@ package com.example.twitterclone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
+import com.example.twitterclone.Adapters.VPAdapter
+import com.example.twitterclone.Authentication.LoginActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -22,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var floatBtn: FloatingActionButton
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager2
-    lateinit var VP_Adapter:VPAdapter
+    lateinit var VP_Adapter: VPAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -67,7 +66,7 @@ class HomeActivity : AppCompatActivity() {
             R.id.menu_logout -> {
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
                 auth.signOut()
-                val intent  = Intent(applicationContext,LoginActivity::class.java)
+                val intent  = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
                 return true
