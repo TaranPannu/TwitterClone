@@ -3,6 +3,7 @@ package com.example.twitterclone.Authentication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -41,16 +42,22 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun sign_up(email: String, password: String) {
         firebaseViewModel.sign_up(email, password).observe(this){
-            if(it)
+            Log.d("a1a","Inside Activity $it")
+            if(it == "success")
             {
                 Toast.makeText(this,"Sign Up Successfully", Toast.LENGTH_SHORT).show()
                 val intent = Intent(applicationContext, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
             }
-            else
+            else if(it == "await")
             {
-               Toast.makeText(this,"Error", Toast.LENGTH_SHORT).show()
+               Toast.makeText(this,"await", Toast.LENGTH_SHORT).show()
+
+            }
+            else if(it == "fail")
+            {
+                Toast.makeText(this,"Error Signing Up", Toast.LENGTH_SHORT).show()
 
             }
         }

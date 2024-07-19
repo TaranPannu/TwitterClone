@@ -20,14 +20,15 @@ import com.google.firebase.database.database
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 object Repo {
 
     var auth: FirebaseAuth =  Firebase.auth
     var database: FirebaseDatabase =  Firebase.database
 
-    fun login(email: String, password: String): LiveData<Boolean> {
-        val loginResult = MutableLiveData<Boolean>()
+ fun login(email: String, password: String): LiveData<Boolean> {
+      var loginResult = MutableLiveData<Boolean>()
 
         if (auth.currentUser!= null)
         {
@@ -46,22 +47,16 @@ object Repo {
         return loginResult
     }
 
- fun isUserLoggedIn():LiveData<Boolean> {
-     val loginResult = MutableLiveData<Boolean>()
-     GlobalScope.launch(Dispatchers.IO) {
-     if (auth.currentUser != null) {
-            loginResult.value = true
-        } else {
-            loginResult.value = false
-        }
-     }
-        return loginResult
+  fun isUserLoggedIn():Boolean
+ {
+     return (auth.currentUser != null)
     }
 
 
-    fun sign_up(email: String, password: String):LiveData<Boolean> {
-        val SignInResult = MutableLiveData<Boolean>()
-        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
+      fun sign_up(email: String, password: String):LiveData<String> {
+         val SignInResult = MutableLiveData<String>()
+         SignInResult.value = "await"
+         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
                 task ->
             if (task.isSuccessful)
             {
@@ -70,12 +65,18 @@ object Repo {
                 database.getReference("users").child(user.uid).setValue(
                     user
                 ).addOnSuccessListener{
-                    SignInResult.value = true
+                    SignInResult.value =  "success"
+
                 }.addOnFailureListener(){
-                    SignInResult.value = false
+                    SignInResult.value = "fail"
                 }
-            } else { SignInResult.value = false }
+            } else { SignInResult.value = "fail"
+                Log.d("a1a","in Repo Failed")
+            }
+        }.addOnFailureListener(){
+            Log.d("a1a","in Repo Failed")
         }
+        Log.d("a1a","returning from Repo $SignInResult")
         return SignInResult
     }
 

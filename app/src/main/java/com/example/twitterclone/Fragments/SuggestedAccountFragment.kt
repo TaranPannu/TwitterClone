@@ -42,7 +42,7 @@ class SuggestedAccountFragment : Fragment(), click_suggest {
         firebaseViewModel.getAllUsers().observe(viewLifecycleOwner)
         {
             list.add(it)
-                recyclerView.adapter = apadter
+            recyclerView.adapter = apadter
         }
         return view
     }
